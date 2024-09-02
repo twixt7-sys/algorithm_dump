@@ -1,4 +1,4 @@
-package sort;
+package search;
 
 public class LinearSearch {
     public static void main(String[] args) {

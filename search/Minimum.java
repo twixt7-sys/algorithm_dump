@@ -1,4 +1,4 @@
-package sort;
+package search;
 
 public class Minimum {
     public static void main(String[] args) {
