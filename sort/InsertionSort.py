@@ -7,7 +7,7 @@ def insertion_sort(data):
         while j >= 0 and temp < data[j]:        # leftside loop (sorted data) (stops)
             data[j + 1] = data[j]               # nudge to left
             j -= 1                              # point to open space
-        data[j + 1] = temp
+        data[j + 1] = temp                      # set new temp
     return data
 
 print(insertion_sort(data))
