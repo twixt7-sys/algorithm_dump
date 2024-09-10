@@ -1,17 +1,27 @@
 package sort;
 
 import java.util.Arrays;
+import java.util.Random;
 
-public class MergeSort {
-    public static void main(String[] args){
-        int[] data = {4,5,5,5,6,2,6,7,98,6,3,45,67,8,9,90,7,56,4,23,1,3,4};
-
+class Main {
+    public static void main(String[] args) {
+        // Merge
+        Random r = new Random();
+        
+        int[] data = new int[10];
+        for(int i = 0; i < data.length; i++){
+            data[i] = r.nextInt(100);
+            System.out.print(data[i] + "   ");
+        }
+        System.out.println();
+        
         data = merge_sort(data);
-
+        
         for(int i: data){
-            System.out.println(i);
+            System.out.print(i + "   ");
         }
     }
+
     public static int[] merge_sort(int[] data){
         if(data.length > 1){
             int mid = data.length / 2;
@@ -24,10 +34,10 @@ public class MergeSort {
             int i = 0, j = 0, k = 0;
 
             while(i < left.length && j < right.length){
-                if (left[i] <= right[j]){
+                if(left[i] <= right[j]){
                     data[k] = left[i];
-                    i++;
-                }else{
+                    i++;    
+                } else {
                     data[k] = right[j];
                     j++;
                 }
