@@ -106,6 +106,7 @@ public class AllSort {
         if(data.length > 1){
             int mid = data.length / 2;
             int[] left = Arrays.copyOfRange(data, 0, mid);
+            
             int[] right = Arrays.copyOfRange(data, mid, data.length);
 
             merge_sort(left);
@@ -140,7 +141,13 @@ public class AllSort {
     }
 
     public static int[] quicksort(int[] data){
-        //to do
+        AllSort obj = new AllSort(){
+            public static int[] quick_sort(int[] data){
+
+                return data;
+            }
+        };
+
         return data;
     }
 
