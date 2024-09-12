@@ -36,7 +36,7 @@ class Main {
             while(i < left.length && j < right.length){
                 if(left[i] <= right[j]){
                     data[k] = left[i];
-                    i++;    
+                    i++;
                 } else {
                     data[k] = right[j];
                     j++;

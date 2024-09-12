@@ -106,16 +106,15 @@ public class AllSort {
         if(data.length > 1){
             int mid = data.length / 2;
             int[] left = Arrays.copyOfRange(data, 0, mid);
-            
             int[] right = Arrays.copyOfRange(data, mid, data.length);
 
             merge_sort(left);
             merge_sort(right);
-
+            
             int i = 0, j = 0, k = 0;
 
             while(i < left.length && j < right.length){
-                if(left[i] < right[j]){
+                if(left[i] <= right[j]){
                     data[k] = left[i];
                     i++;
                 }else{
@@ -141,12 +140,12 @@ public class AllSort {
     }
 
     public static int[] quicksort(int[] data){
-        AllSort obj = new AllSort(){
+        /* AllSort obj = new AllSort(){
             public static int[] quick_sort(int[] data){
 
                 return data;
             }
-        };
+        };*/
 
         return data;
     }
