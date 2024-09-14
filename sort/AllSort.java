@@ -140,12 +140,21 @@ public class AllSort {
     }
 
     public static int[] quicksort(int[] data){
-        /* AllSort obj = new AllSort(){
-            public static int[] quick_sort(int[] data){
-
-                return data;
+        AllSort as = new AllSort(){
+            public int find_max(int[] data){
+                int max = data[0];
+                for(int i: data){
+                    if(i > max)
+                        max = i;
+                    }
+            return max;
             }
-        };*/
+        };
+
+        int[][] radix_array = new int[10][data.length];
+        int[] counts = new int[10];
+        int max = as.find_max(data);
+        int exp = 1;
 
         return data;
     }
@@ -161,7 +170,6 @@ public class AllSort {
     }
 
     public static int[] radix_sort(int[] data){
-        //to do
         return data;
     }
 }
