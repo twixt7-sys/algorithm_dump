@@ -19,19 +19,19 @@ public class AllSort {
             System.out.println((i+1) + ". " + algorithms[i] + "sort");
 
         System.out.print("\nEnter a number: ");
-        data = sort(data, sc.nextInt());
+        data = sort(r, data, sc.nextInt());
 
         print_array(data);
 
     }
-    public static int[] sort(int[] data, int type){
+    public static int[] sort(Random r, int[] data, int type){
         return switch(type){
             case 1 -> selection_sort(data);
             case 2 -> bubble_sort(data);
             case 3 -> insertion_sort(data);
             case 4 -> merge_sort(data);
-            case 5 -> quicksort(data);
-            case 6 -> random_quicksort(data);
+            case 5 -> quicksort(data, 0, data.length);
+            case 6 -> random_quicksort(r, data, 0, data.length);
             case 7 -> counting_sort(data);
             case 8 -> radix_sort(data);
             default -> null;
@@ -62,15 +62,13 @@ public class AllSort {
     }
 
     public static int[] bubble_sort(int[] data){
-        for(int i = 0; i < data.length - 1; i++){
-            for(int j = 0; j < data.length - i - 1; j++){
+        for(int i = 0; i < data.length - 1; i++)
+            for(int j = 0; j < data.length - i - 1; j++)
                 if(data[j] < data[j + 1]){
                     int temp = data[j];
                     data[j] = data[j + 1];
                     data[j + 1] = temp;
                 }
-            }
-        }
         return data;
     }
 
@@ -78,9 +76,8 @@ public class AllSort {
         for(int i = 0; i < data.length - 1; i++){
             int min_index = i;
             for(int j = i + 1; j < data.length; j++){
-                if(data[min_index] < data[j]){
+                if(data[min_index] < data[j])
                     min_index = j;
-                }
                 int temp = data[min_index];
                 data[min_index] = data[i];
                 data[i] = temp;
@@ -110,66 +107,114 @@ public class AllSort {
 
             merge_sort(left);
             merge_sort(right);
-            
+
             int i = 0, j = 0, k = 0;
 
-            while(i < left.length && j < right.length){
-                if(left[i] <= right[j]){
-                    data[k] = left[i];
-                    i++;
-                }else{
-                    data[k] = right[j];
-                    j++;
-                }
-                k++;
-            }
+            while(i < left.length && j < right.length)
+                if(left[i] <= right[j])
+                    data[k++] = left[i++];
+                else
+                    data[k++] = right[j++];
 
-            while(i < left.length){
-                data[k] = left[i];
-                i++;
-                k++;
-            }
-
-            while(j < right.length){
-                data[k] = right[j];
-                j++;
-                k++;
-            }
+            while(i < left.length)
+                data[k++] = left[i++];
+            while(j < right.length)
+                data[k++] = right[j++];
         }
         return data;
     }
 
-    public static int[] quicksort(int[] data){
-        AllSort as = new AllSort(){
-            public int find_max(int[] data){
-                int max = data[0];
-                for(int i: data){
-                    if(i > max)
-                        max = i;
-                    }
-            return max;
-            }
-        };
+    public static int[] quicksort(int[] data, int left, int right) {
+        if (left < right) {
+            int pivot = data[right];
+            int i = left - 1;
 
-        int[][] radix_array = new int[10][data.length];
-        int[] counts = new int[10];
-        int max = as.find_max(data);
-        int exp = 1;
+            for (int j = left; j < right; j++)
+                if (data[j] <= pivot){
+                    i++;
+                    int temp = data[i];
+                    data[i] = data[j];
+                    data[j] = temp;
+                }
+            int temp = data[i + 1];
+            data[i + 1] = data[right];
+            data[right] = temp;
 
+            int partitionIndex = i + 1;
+
+            quicksort(data, left, partitionIndex - 1);
+            quicksort(data, partitionIndex + 1, right);
+        }
         return data;
     }
 
-    public static int[] random_quicksort(int[] data){
-        //to do
+    public static int[] random_quicksort(Random random, int[] data, int left, int right){
+        if (left < right) {
+            int pivotIndex = left + random.nextInt(right - left + 1);
+            int pivot = data[pivotIndex];
+            data[pivotIndex] = data[right];
+            data[right] = pivot;
+
+            int i = left - 1;
+            for (int j = left; j < right; j++) {
+                if (data[j] <= pivot) {
+                    i++;
+                    int temp = data[i];
+                    data[i] = data[j];
+                    data[j] = temp;
+                }
+            }
+            
+            int temp = data[i + 1];
+            data[i + 1] = data[right];
+            data[right] = temp;
+            
+            int partitionIndex = i + 1;
+            
+            random_quicksort(random, data, left, partitionIndex - 1);
+            random_quicksort(random, data, partitionIndex + 1, right);
+        }
         return data;
     }
 
     public static int[] counting_sort(int[] data){
-        //to do
+        int max = data[0];
+        for(int i : data) if(i > max) max = i;
+
+        int[] count = new int[max + 1];
+        for(int i : data) count[i]++;
+
+        int index = 0;
+        for(int i = 0; i <= max; i++)
+            while(count[i] > 0){
+                data[index++] = i;
+                count[i]++;
+            }
         return data;
     }
 
     public static int[] radix_sort(int[] data){
+        int[][] rad_array = new int[10][data.length];
+        int[] count = new int[10];
+        int max = data[0], exp = 1;
+        for(int i: data) if(i > max) max = i;   // rogue code xD
+
+        while(max / exp > 0){
+            for(int i: data){
+                int rad_index = (i / exp) % 10;
+                rad_array[rad_index][count[rad_index]] = i;
+                count[rad_index]++;
+            }
+            int pos = 0;
+            for(int i = 0; i < 10; i++){
+                for(int j = 0; j < count[i]; j++){
+                    data[pos] = rad_array[i][j];
+                    pos++;
+                }
+                count[i] = 0;
+            }
+            exp *= 10;
+        }
         return data;
     }
 }
