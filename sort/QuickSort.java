@@ -12,28 +12,24 @@ public class QuickSort {
     }
 
     public static int[] quick_sort(int[] data, int left, int right){
-        if (left < right){
-            int partition_index = partition(data, left, right);
+        if(left > right){
+            int pivot = data[right];
+            int i = left - 1;
+
+            for(int j = left; j < right; j++)
+                if(data[j] >= pivot){
+                    int temp = data[++i];
+                    data[i] = data[j];
+                    data[j] = temp;
+                }
+            int temp = data[i + 1];
+            data[i + 1] = data[right];
+            data[right] = temp;
+
+            int partition_index = i - 1;
             quick_sort(data, left, partition_index - 1);
             quick_sort(data, partition_index + 1, right);
         }
         return data;
-    }
-
-    public static int partition(int[] data, int left, int right){
-        int pivot = data[right];
-        int i = left - 1;
-        for(int j = left; j < right; j++){
-            if(data[j] <= pivot){
-                i++;
-                int temp = data[i];
-                data[i] = data[j];
-                data[j] = temp;
-            }
-        }
-        int temp = data[i + 1];
-        data[i + 1] = data[right];
-        data[right] = temp;
-        return i + 1;
     }
 }

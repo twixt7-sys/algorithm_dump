@@ -45,8 +45,7 @@ class Main {
             }
 
             while(i < left.length){
-                data[k] = left[i];
-                i++;
+                data[k++] = left[i++];
                 k++;
             }
 

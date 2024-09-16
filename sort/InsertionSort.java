@@ -2,23 +2,23 @@ package sort;
 
 public class InsertionSort{
     public static void main(String[] args) {
-        int[] data = {3, 7, 4, 6, 3, 2, 6, 6, 8, 9, 5, 7, 9, 3, 4, 6, 9};
+        int[] data = {15,5226,73,48,58,59,96,6,9584,73,748,737,47,3};
 
-        // for - while    (temp, i, j, j + 1)
-        for(int i = 1; i < data.length; i++){               //pointer
-            int temp = data[i];                             //temp(tig gunit sa ubos)
-            int j = i - 1;                                  //pointer j
-            while(j >= 0 && temp < data[j]){                //check kung kinsa ang mas gamay
-                data[j + 1] = data[j];                      //switch
-                j--;                                        //decrement
+        data = insertion_sort(data);
+
+        for(int i : data) System.out.print( i + "   ");
+    }
+
+    public static int[] insertion_sort(int[] data){
+        for(int i = 1; i < data.length; i++){
+            int temp = data[i];
+            int j = i - 1;
+            while(j >= 0 && temp < data[j]){
+                data[j + 1] = data[j];
+                j--;
             }
-            data[j + 1] = temp;                             //insert
+            data[j + 1] = temp;
         }
-
-
-
-        for(int i : data){
-            System.out.println(i);
-        }
+        return data;
     }
 }

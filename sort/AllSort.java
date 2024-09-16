@@ -111,15 +111,10 @@ public class AllSort {
             int i = 0, j = 0, k = 0;
 
             while(i < left.length && j < right.length)
-                if(left[i] <= right[j])
-                    data[k++] = left[i++];
-                else
-                    data[k++] = right[j++];
+                if(left[i] <= right[j])     data[k++] = left[i++]; else                        data[k++] = right[j++];
 
-            while(i < left.length)
-                data[k++] = left[i++];
-            while(j < right.length)
-                data[k++] = right[j++];
+            while(i < left.length)          data[k++] = left[i++];
+            while(j < right.length)         data[k++] = right[j++];
         }
         return data;
     }

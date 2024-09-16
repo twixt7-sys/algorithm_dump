@@ -38,10 +38,7 @@ public class RadixSort{
 
     public static int max(int[] data){
         int max_val = data[0];
-        for(int i : data){
-            if(i > max_val)
-                max_val = i;
-        }
+        for(int i : data) if(i > max_val) max_val = i;
         return max_val;
     }
 }
