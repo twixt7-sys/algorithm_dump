@@ -14,9 +14,12 @@ public class RadixSort2{
     public static int[] radix_sort(int[] data){
         int[][] radix_array = new int[10][data.length];
         int[] count = new int[10];
-        int max = max(data);
+        int max = data[0];
+
+        for(int i: data) if (i > max) max = i;
+
         int exp = 1;
-        
+
         while(max / exp > 0){
             for(int i : data){
                 int radix_index = (i / exp) % 10;
@@ -34,15 +37,5 @@ public class RadixSort2{
             exp *= 10;
         }
         return data;
-    }
-
-    public static int max(int[] data){
-        int max = data[0];
-        for(int i : data){
-            if(i > max){
-                max = i;
-            }
-        }
-        return max;
     }
 }
