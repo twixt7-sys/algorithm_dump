@@ -1,4 +1,4 @@
-package problemset1;
+
 
 // Print the multiplication table
 
