@@ -2,15 +2,18 @@
 
 public class prob19 {
     public static void main(String[] args) {
-        first_prime(72);
+        System.out.println(first_prime(100));
     }
     static int first_prime(int n){
-        //prime number starting from n
-        for(int i = 2; i < n; i++){
-            for(int j = i; j < i + 10; j++){
-                if(j % i == 0) return j;
+        int i = n;
+        Loop:
+        while(true){
+            for(int j = 2; j < i; j++){
+                if(i % j == 0) break;
+                if(j >= i - 1) break Loop;
             }
+            i++;
         }
-        return 0;
+        return i;
     }
 }
