@@ -1,3 +1,5 @@
+// Rotating an array to the right by n
+
 public class prob21 {
     public static void main(String[] args) {
         int[] data = {14, 25, 62, 41, 26, 58, 26, 36, 74, 85};

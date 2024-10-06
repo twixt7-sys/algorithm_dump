@@ -1,8 +1,5 @@
 // Rotating an array to the left by n
 
-// To debug
-
-
 public class prob20 {
     public static void main(String[] args) {
         int[] data = {41, 51, 37, 51, 165, 73, 72, 15, 38};
