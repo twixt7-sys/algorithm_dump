@@ -1,4 +1,5 @@
-//  Create a function that takes two arrays as parameters and returns a new array with the elements that are only in one array(not in both)
+//  Create a function that takes two arrays as parameters and returns a new array with the elements that are only in one array(not in both)"
+// approach: remove elements found in both arrays and return the list as an array
 import java.util.LinkedList;
 
 public class prob25 {
@@ -10,18 +11,14 @@ public class prob25 {
     }
     static int[] get_solo_elements(int[] data1, int[] data2){
         LinkedList<Integer> list = new LinkedList<>();
-        
-        for(int i = 0; i < data1.length; i++){
 
+        for(int i: data1) list.add(i);
+        for(int i: data2) list.add(i);
+
+        for(int i: data1){
+            if(list.contains(i)) list.remove(list.indexOf(i));  
         }
 
-        for(int )
-        list.contains()
-
-        int count = 0;
-        for(int i = 
-    )
-        
-        return data;
+        return list.toArray();
     }
 }
